@@ -21,7 +21,7 @@ class AboutPage extends StatelessWidget {
             'About',
             style: GoogleFonts.poppins(
               color: Kcolor.txt2,
-              fontSize: 12.sp,
+              fontSize: 17.sp,
               fontWeight: FontWeight.w700,
             ),
           ),
@@ -41,7 +41,7 @@ class AboutPage extends StatelessWidget {
           children: [
             SizedBox(height: 2.h),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 4.w),
+              padding: EdgeInsets.symmetric(horizontal: 17.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -49,25 +49,25 @@ class AboutPage extends StatelessWidget {
                     'About Us',
                     style: GoogleFonts.poppins(
                       color: const Color.fromARGB(255, 135, 134, 134),
-                      fontSize: 12.sp,
+                      fontSize: 15.sp,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
-                  SizedBox(height: 1.5.h),
+                  SizedBox(height: 10.h),
                   Text(
                     'Eat Incredible is a food delivery app that allows you to order food from your  Eat Incredible is a food delivery app that  passionate about food and technology. We are committed to providing you with the best food delivery experience.  favorite restaurants and have it delivered to your doorstep. We are a team of young and vibrant individuals who are passionate about food and technology. We are committed to providing you with the best food delivery experience. Eat Incredible is a food delivery app that allows you to order food from your favorite restaurants and have it delivered to your doorstep. We are a team of young and vibrant individuals who are passionate about food and technology. We are committed to providing you with the best food delivery experience.',
                     style: GoogleFonts.poppins(
                       color: const Color.fromARGB(255, 113, 112, 112),
-                      fontSize: 10.sp,
+                      fontSize: 11.5.sp,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                  SizedBox(height: 3.h),
+                  SizedBox(height: 15.h),
                   Text(
                     'Contact Us',
                     style: GoogleFonts.poppins(
                       color: const Color.fromARGB(255, 135, 134, 134),
-                      fontSize: 12.sp,
+                      fontSize: 15.sp,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
@@ -80,7 +80,7 @@ class AboutPage extends StatelessWidget {
                       'nothing12@gmai.com',
                       style: GoogleFonts.poppins(
                         color: const Color.fromARGB(255, 113, 112, 112),
-                        fontSize: 10.sp,
+                        fontSize: 14.sp,
                         fontWeight: FontWeight.w400,
                       ),
                     ),
@@ -92,7 +92,7 @@ class AboutPage extends StatelessWidget {
                       '+91 1234567890',
                       style: GoogleFonts.poppins(
                         color: const Color.fromARGB(255, 113, 112, 112),
-                        fontSize: 10.sp,
+                        fontSize: 14.sp,
                         fontWeight: FontWeight.w400,
                       ),
                     ),

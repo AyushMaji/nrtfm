@@ -15,8 +15,8 @@ class LoginPage extends StatelessWidget {
           fit: BoxFit.cover,
         ),
       ),
-      height: 100.h,
-      width: 100.w,
+      height: double.infinity,
+      width: double.infinity,
       child: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,

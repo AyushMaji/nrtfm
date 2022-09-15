@@ -18,8 +18,12 @@ class BookMarkCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: SizedBox(
-        width: 93.w,
+      child: Container(
+        padding: EdgeInsets.only(
+          left: 15.w,
+          right: 15.w,
+          top: 10.h,
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,10 +36,10 @@ class BookMarkCard extends StatelessWidget {
                   child: CustomPic(
                       imageUrl:
                           "https://img.freepik.com/free-photo/acoustic-guitar-close-up-beautiful-colored-background_169016-3530.jpg?w=900&t=st=1663069595~exp=1663070195~hmac=edb33da5fa3fb1daa4c8fcac815de2d1150dba4ee7dc639515dd4e5c9b64727f",
-                      height: 7.h,
-                      width: 13.w),
+                      height: 50.h,
+                      width: 65.w),
                 ),
-                SizedBox(width: 5.w),
+                SizedBox(width: 15.w),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -43,16 +47,16 @@ class BookMarkCard extends StatelessWidget {
                       'Acoustic Guitar Song',
                       style: TextStyle(
                         color: Kcolor.txt2,
-                        fontSize: 11.sp,
+                        fontSize: 13.sp,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     SizedBox(height: 1.h),
-                    const Text(
+                    Text(
                       '1.5k views | podcast',
                       style: TextStyle(
                         color: Kcolor.txt1,
-                        fontSize: 13,
+                        fontSize: 12.sp,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -63,7 +67,7 @@ class BookMarkCard extends StatelessWidget {
             Icon(
               Icons.favorite,
               color: Colors.green,
-              size: 22.sp,
+              size: 27.sp,
             )
           ],
         ),

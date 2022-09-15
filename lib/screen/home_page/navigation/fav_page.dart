@@ -25,7 +25,7 @@ class FavPage extends StatelessWidget {
                 ),
               ),
               backgroundColor: Kcolor.bgColor,
-              expandedHeight: 32.h,
+              expandedHeight: 250.h,
               floating: false,
               pinned: true,
               flexibleSpace: FlexibleSpaceBar(
@@ -60,7 +60,7 @@ class FavPage extends StatelessWidget {
                   child: const BookMarkCard(
                     imageUrl:
                         "https://img.freepik.com/free-photo/acoustic-guitar-close-up-beautiful-colored-background_169016-3530.jpg?w=900&t=st=1663069595~exp=1663070195~hmac=edb33da5fa3fb1daa4c8fcac815de2d1150dba4ee7dc639515dd4e5c9b64727f",
-                    title: 'Acoustic Guitar Song',
+                    title: 'Acoustic Guitar Song notigm ',
                     views: '1.5k views | podcast',
                     catagory: 'podcast',
                   ),

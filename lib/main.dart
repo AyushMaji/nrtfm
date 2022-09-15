@@ -1,6 +1,5 @@
 import 'package:nrtfm/constant/color.dart';
 import 'package:nrtfm/screen/login_page/login_page.dart';
-
 import 'utils/barrel.dart';
 
 void main() {
@@ -14,11 +13,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return Sizer(builder: (context, orientation, deviceType) {
-      return const GetMaterialApp(
-          title: 'NRT FM',
-          debugShowCheckedModeBanner: false,
-          home: LoginPage());
-    });
+    return ScreenUtilInit(
+        designSize: const Size(360, 690),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (context, child) {
+          return GetMaterialApp(
+              theme: ThemeData(
+                useMaterial3: true,
+              ),
+              title: 'NRT FM',
+              debugShowCheckedModeBanner: false,
+              home: const LoginPage());
+        });
   }
 }

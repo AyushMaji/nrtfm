@@ -25,8 +25,8 @@ class _AccountInfoPageState extends State<AccountInfoPage> {
           child: Text(
             'Account Info',
             style: GoogleFonts.poppins(
-              color: const Color.fromRGBO(97, 97, 97, 1),
-              fontSize: 12.sp,
+              color: Kcolor.txt2,
+              fontSize: 17.sp,
               fontWeight: FontWeight.w700,
             ),
           ),
@@ -42,21 +42,25 @@ class _AccountInfoPageState extends State<AccountInfoPage> {
         ],
       ),
       bottomNavigationBar: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.9.h),
+        padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 19.h),
         child: SizedBox(
-          height: 6.h,
+          height: 40.h,
           child: ElevatedButton(
             onPressed: () {},
             style: ElevatedButton.styleFrom(
-              // ignore: deprecated_member_use
-              primary: const Color(0xffE20A13),
+              backgroundColor: const Color(0xffE20A13),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5.sp),
               ),
               padding: EdgeInsets.symmetric(vertical: 1.5.h),
             ),
-            child: const Text(
+            child: Text(
               "LOG OUT",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 13.5.sp,
+                fontWeight: FontWeight.w700,
+              ),
             ),
           ),
         ),
@@ -69,7 +73,7 @@ class _AccountInfoPageState extends State<AccountInfoPage> {
               child: Stack(
                 children: [
                   CircleAvatar(
-                    radius: 50.sp,
+                    radius: 55.sp,
                     child: Container(
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
@@ -84,30 +88,30 @@ class _AccountInfoPageState extends State<AccountInfoPage> {
                     bottom: 0,
                     right: 0,
                     child: CircleAvatar(
-                      radius: 13.sp,
+                      radius: 15.sp,
                       backgroundColor: const Color.fromRGBO(255, 214, 214, 1),
                       child: Icon(
                         Icons.camera_alt,
                         color: const Color(0xffE20A13),
-                        size: 15.sp,
+                        size: 17.sp,
                       ),
                     ),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 2.h),
+            SizedBox(height: 15.h),
             Text(
               'Your Photo',
               style: GoogleFonts.poppins(
                 color: const Color(0xffE20A13),
-                fontSize: 11.sp,
+                fontSize: 16.sp,
                 fontWeight: FontWeight.w500,
               ),
             ),
-            SizedBox(height: 2.h),
+            SizedBox(height: 20.h),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 3.9.w),
+              padding: EdgeInsets.symmetric(horizontal: 13.w),
               child: Column(
                 children: [
                   TextField(
@@ -116,13 +120,13 @@ class _AccountInfoPageState extends State<AccountInfoPage> {
                       hintText: 'Surajit Dutta',
                       hintStyle: GoogleFonts.poppins(
                         color: const Color.fromRGBO(97, 97, 97, 1),
-                        fontSize: 11.sp,
+                        fontSize: 15.sp,
                         fontWeight: FontWeight.w500,
                       ),
                       prefixIcon: Icon(
                         Icons.person,
                         color: const Color(0xffE20A13),
-                        size: 15.sp,
+                        size: 22.sp,
                       ),
                       enabledBorder: const UnderlineInputBorder(
                         borderSide: BorderSide(
@@ -136,20 +140,20 @@ class _AccountInfoPageState extends State<AccountInfoPage> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 2.h),
+                  SizedBox(height: 14.h),
                   TextField(
                     readOnly: true,
                     decoration: InputDecoration(
                       hintText: 'ayush.maji2001@gmail.com',
                       hintStyle: GoogleFonts.poppins(
                         color: const Color.fromRGBO(97, 97, 97, 1),
-                        fontSize: 11.sp,
+                        fontSize: 15.sp,
                         fontWeight: FontWeight.w500,
                       ),
                       prefixIcon: Icon(
                         Icons.email_outlined,
                         color: const Color(0xffE20A13),
-                        size: 15.sp,
+                        size: 22.sp,
                       ),
                       enabledBorder: const UnderlineInputBorder(
                         borderSide: BorderSide(

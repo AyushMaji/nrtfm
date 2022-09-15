@@ -13,46 +13,47 @@ class Gbtn extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Padding(
-          padding: EdgeInsets.only(bottom: 10.h),
+          padding: EdgeInsets.only(bottom: 50.h),
           child: SizedBox(
-            height: 9.h,
-            width: 90.w,
+            height: 90.h,
+            width: 190.w,
             child: Image.asset(
               "assets/images/logo.png",
-              height: 10.h,
-              width: 87.w,
             ),
           ),
         ),
-        GestureDetector(
-          onTap: onTap,
-          child: Container(
-            height: 7.h,
-            width: 85.w,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(6.sp),
-              color: Kcolor.primaryColor,
-            ),
-            child: Row(
-              children: [
-                Container(
-                  padding: EdgeInsets.only(left: 4.w, right: 9.w),
-                  child: Image.asset(
-                    "assets/images/google_logo.png",
-                    height: 4.5.h,
-                    width: 13.w,
-                    fit: BoxFit.cover,
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 21.w, vertical: 30.h),
+          child: GestureDetector(
+            onTap: onTap,
+            child: Container(
+              height: 50.h,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6.sp),
+                color: Kcolor.primaryColor,
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(left: 15.w, right: 19.w),
+                    child: Image.asset(
+                      "assets/images/google_logo.png",
+                      height: 32.h,
+                      width: 54.w,
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                ),
-                Text(
-                  "Sign in with Google",
-                  style: TextStyle(
-                    color: Kcolor.white,
-                    fontSize: 15.sp,
-                    fontWeight: FontWeight.w600,
+                  Text(
+                    "Sign in with Google",
+                    style: TextStyle(
+                      color: Kcolor.white,
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

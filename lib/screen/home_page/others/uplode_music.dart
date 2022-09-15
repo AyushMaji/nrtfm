@@ -28,14 +28,14 @@ class _MusicUplodeState extends State<MusicUplode> {
           Get.back();
         },
         child: Container(
-          height: 7.h,
+          height: 43.h,
           color: const Color.fromARGB(255, 1, 196, 50),
           child: Center(
             child: Text(
               'UPLODE',
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 2.5.h,
+                fontSize: 15.5.sp,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -44,6 +44,7 @@ class _MusicUplodeState extends State<MusicUplode> {
       ),
       appBar: AppBar(
         elevation: 1,
+        backgroundColor: Kcolor.bgColor,
         leading: IconButton(
           icon: const Icon(
             Icons.arrow_back_ios_rounded,
@@ -51,104 +52,113 @@ class _MusicUplodeState extends State<MusicUplode> {
           ),
           onPressed: () => Navigator.pop(context),
         ),
-        title: const Text('Uplode Music',
+        title: Text('Uplode Music',
             style: TextStyle(
-              color: Kcolor.txt1,
-              fontSize: 17,
+              color: Kcolor.txt2,
+              fontSize: 17.sp,
               fontWeight: FontWeight.bold,
             )),
-        backgroundColor: Kcolor.bgColor,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                TextInputField(
-                  label: 'Song Tittle',
-                  maxline: 1,
-                  controller: TextEditingController(),
-                ),
-                SizedBox(
-                  height: 3.h,
-                ),
-                TextInputField(
-                  label: 'description',
-                  maxline: 5,
-                  controller: TextEditingController(),
-                ),
-                SizedBox(
-                  height: 2.h,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Kcolor.primaryColor,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 15.w),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(height: 25.h),
+              TextInputField(
+                label: 'Song Tittle',
+                maxline: 1,
+                controller: TextEditingController(),
+              ),
+              SizedBox(
+                height: 20.h,
+              ),
+              TextInputField(
+                label: 'description',
+                maxline: 3,
+                controller: TextEditingController(),
+              ),
+              SizedBox(
+                height: 10.h,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Kcolor.primaryColor,
+                      ),
+                      onPressed: () => _loadPicker1(),
+                      child: Text("Uplode Banner Picture",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12.sp,
+                          ))),
+                  _pickedImage1 == null
+                      ? const Icon(
+                          Icons.photo_size_select_actual_rounded,
+                          color: Kcolor.secondaryColor,
+                        )
+                      : const Icon(
+                          Icons.check_circle,
+                          color: Color.fromARGB(255, 13, 240, 5),
                         ),
-                        onPressed: () => _loadPicker1(),
-                        child: const Text("Uplode Banner Picture")),
-                    _pickedImage1 == null
-                        ? const Icon(
-                            Icons.photo_size_select_actual_rounded,
-                            color: Kcolor.secondaryColor,
-                          )
-                        : const Icon(
-                            Icons.check_circle,
-                            color: Color.fromARGB(255, 13, 240, 5),
-                          ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Kcolor.primaryColor,
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Kcolor.primaryColor,
+                      ),
+                      onPressed: () {
+                        _loadPicker2();
+                      },
+                      child: Text("Uplode  image",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12.sp,
+                          ))),
+                  _pickedImage2 == null
+                      ? const Icon(
+                          Icons.remove_red_eye_outlined,
+                          color: Kcolor.secondaryColor,
+                        )
+                      : const Icon(
+                          Icons.check_circle,
+                          color: Color.fromARGB(255, 13, 240, 5),
                         ),
-                        onPressed: () {
-                          _loadPicker2();
-                        },
-                        child: const Text("Uplode  image")),
-                    _pickedImage2 == null
-                        ? const Icon(
-                            Icons.remove_red_eye_outlined,
-                            color: Kcolor.secondaryColor,
-                          )
-                        : const Icon(
-                            Icons.check_circle,
-                            color: Color.fromARGB(255, 13, 240, 5),
-                          ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Kcolor.primaryColor,
-                        ),
-                        onPressed: () {
-                          _loadMusicPicker();
-                        },
-                        child: const Text("uplode  Music")),
-                    _pickedMusic == null
-                        ? const Icon(
-                            Icons.queue_music_sharp,
-                            color: Kcolor.secondaryColor,
-                          )
-                        : const Icon(
-                            Icons.check_circle,
-                            color: Color.fromARGB(255, 13, 240, 5),
-                          )
-                  ],
-                ),
-              ],
-            ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Kcolor.primaryColor,
+                      ),
+                      onPressed: () {
+                        _loadMusicPicker();
+                      },
+                      child: Text("uplode  Music",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12.sp,
+                          ))),
+                  _pickedMusic == null
+                      ? const Icon(
+                          Icons.queue_music_sharp,
+                          color: Kcolor.secondaryColor,
+                        )
+                      : const Icon(
+                          Icons.check_circle,
+                          color: Color.fromARGB(255, 13, 240, 5),
+                        )
+                ],
+              ),
+            ],
           ),
         ),
       ),
