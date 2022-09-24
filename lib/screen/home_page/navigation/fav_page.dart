@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:lottie/lottie.dart';
 import 'package:nrtfm/constant/color.dart';
+import 'package:nrtfm/provider/userdata.dart';
 import 'package:nrtfm/utils/barrel.dart';
 import 'package:nrtfm/widget/bookmark_card/bookmark_card.dart';
 
@@ -49,24 +52,86 @@ class FavPage extends StatelessWidget {
             child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ListView.builder(
-              scrollDirection: Axis.vertical,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: 20,
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                return Container(
-                  padding: EdgeInsets.only(bottom: 1.5.h),
-                  child: const BookMarkCard(
-                    imageUrl:
-                        "https://img.freepik.com/free-photo/acoustic-guitar-close-up-beautiful-colored-background_169016-3530.jpg?w=900&t=st=1663069595~exp=1663070195~hmac=edb33da5fa3fb1daa4c8fcac815de2d1150dba4ee7dc639515dd4e5c9b64727f",
-                    title: 'Acoustic Guitar Song notigm ',
-                    views: '1.5k views | podcast',
-                    catagory: 'podcast',
-                  ),
-                );
-              },
-            ),
+            StreamBuilder(
+                stream: FirebaseFirestore.instance
+                    .collection('AddToCard')
+                    .where('userID',
+                        isEqualTo:
+                            Provider.of<UserDataProvider>(context, listen: true)
+                                .getUid)
+                    .snapshots(),
+                builder: (context, AsyncSnapshot snapshot) {
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 15.h),
+                        child: SizedBox(
+                          height: 100.h,
+                          child: Lottie.asset('assets/loading.json'),
+                        ),
+                      ),
+                    );
+                  }
+                  if (snapshot.data.docs.length == 0) {
+                    return Padding(
+                      padding: EdgeInsets.only(top: 15.h),
+                      child: SizedBox(
+                        height: 230.h,
+                        child: Lottie.asset('assets/fav.json'),
+                      ),
+                    );
+                  }
+                  return ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: snapshot.data.docs.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onLongPress: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: const Text('Delete'),
+                                  content: const Text(
+                                      'Are you sure you want to delete this item?'),
+                                  actions: [
+                                    TextButton(
+                                        onPressed: () {
+                                          Provider.of<UserDataProvider>(context,
+                                                  listen: false)
+                                              .addtoCardremove(
+                                                  snapshot.data.docs[index]
+                                                      ['musicId'],
+                                                  snapshot.data.docs[index]
+                                                      ['userID']);
+                                          Navigator.pop(context);
+                                        },
+                                        child: const Text('Yes')),
+                                    TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: const Text('No')),
+                                  ],
+                                );
+                              });
+                        },
+                        child: Container(
+                          padding: EdgeInsets.only(bottom: 1.5.h),
+                          child: BookMarkCard(
+                            imageUrl: snapshot.data.docs[index]['songPoster'],
+                            title: snapshot.data.docs[index]['tittle'],
+                            views:
+                                '${snapshot.data.docs[index]['totalRating']} Likes | ${snapshot.data.docs[index]['catagory']}',
+                            catagory: snapshot.data.docs[index]['catagory'],
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                }),
           ],
         )),
       ),

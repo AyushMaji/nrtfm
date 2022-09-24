@@ -1,5 +1,9 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nrtfm/controller/login/login_bloc.dart';
 import 'package:nrtfm/screen/home_page/navigation/navigation.dart';
+import 'package:nrtfm/screen/spalash/spalash_page.dart';
 import 'package:nrtfm/utils/barrel.dart';
+import 'package:nrtfm/utils/messsenger.dart';
 import 'package:nrtfm/widget/gbtn/gbtn.dart';
 
 class LoginPage extends StatelessWidget {
@@ -32,9 +36,48 @@ class LoginPage extends StatelessWidget {
                 Color.fromARGB(51, 0, 0, 0)
               ]),
         ),
-        child: Gbtn(onTap: () {
-          Get.to(() => const Navigation());
-        }),
+        child: BlocConsumer<LoginBloc, LoginState>(
+          listener: (context, state) {
+            state.when(
+              initial: () {},
+              loading: () {},
+              login: (uid, uname) {
+                Snackber.successSnackbar('Login Success', 'Welcome $uname');
+                Get.off(() => Navigation(
+                      id: uid,
+                    ));
+              },
+              logout: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) {
+                    return const SpalashPage();
+                  }),
+                );
+              },
+            );
+          },
+          builder: (context, state) {
+            return state.when(
+              initial: () {
+                return Gbtn(onTap: () {
+                  BlocProvider.of<LoginBloc>(context).add(const Login());
+                });
+              },
+              loading: () {
+                return const Center(child: CircularProgressIndicator());
+              },
+              login: (uid, uname) {
+                return const SizedBox();
+              },
+              logout: () {
+                return Gbtn(onTap: () {
+                  BlocProvider.of<LoginBloc>(context).add(const Login());
+                });
+              },
+            );
+          },
+        ),
       ),
     ));
   }

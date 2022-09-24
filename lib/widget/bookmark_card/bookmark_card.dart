@@ -33,18 +33,15 @@ class BookMarkCard extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8.sp),
-                  child: CustomPic(
-                      imageUrl:
-                          "https://img.freepik.com/free-photo/acoustic-guitar-close-up-beautiful-colored-background_169016-3530.jpg?w=900&t=st=1663069595~exp=1663070195~hmac=edb33da5fa3fb1daa4c8fcac815de2d1150dba4ee7dc639515dd4e5c9b64727f",
-                      height: 50.h,
-                      width: 65.w),
+                  child:
+                      CustomPic(imageUrl: imageUrl, height: 50.h, width: 65.w),
                 ),
                 SizedBox(width: 15.w),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Acoustic Guitar Song',
+                      title,
                       style: TextStyle(
                         color: Kcolor.txt2,
                         fontSize: 13.sp,
@@ -53,7 +50,7 @@ class BookMarkCard extends StatelessWidget {
                     ),
                     SizedBox(height: 1.h),
                     Text(
-                      '1.5k views | podcast',
+                      views,
                       style: TextStyle(
                         color: Kcolor.txt1,
                         fontSize: 12.sp,

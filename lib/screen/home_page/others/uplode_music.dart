@@ -1,11 +1,14 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:dropdown_button2/custom_dropdown_button2.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nrtfm/constant/color.dart';
+import 'package:nrtfm/provider/userdata.dart';
 import 'package:nrtfm/utils/barrel.dart';
+import 'package:nrtfm/utils/messsenger.dart';
 import 'package:nrtfm/widget/input_field/text_input_field.dart';
 
 class MusicUplode extends StatefulWidget {
@@ -15,33 +18,77 @@ class MusicUplode extends StatefulWidget {
 }
 
 class _MusicUplodeState extends State<MusicUplode> {
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
   File? _pickedImage1;
   File? _pickedImage2;
   PlatformFile? _pickedMusic;
-
+  String iteamData = "Select Catagory";
+  String? selectedValue;
   @override
   Widget build(BuildContext context) {
+    final List<String> items = [
+      'stories',
+      'script',
+      'conversation',
+      'recitation',
+      'music',
+      'other'
+    ];
+
     return Scaffold(
       backgroundColor: Kcolor.bgColor,
-      bottomNavigationBar: InkWell(
-        onTap: () {
-          Get.back();
-        },
-        child: Container(
-          height: 43.h,
-          color: const Color.fromARGB(255, 1, 196, 50),
-          child: Center(
-            child: Text(
-              'UPLODE',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 15.5.sp,
-                fontWeight: FontWeight.bold,
+      bottomNavigationBar: Provider.of<UserDataProvider>(context, listen: true)
+                  .getIsuplode ==
+              false
+          ? InkWell(
+              onTap: () {
+                if (_titleController.text.isNotEmpty &&
+                    _descriptionController.text.isNotEmpty &&
+                    _pickedImage1 != null &&
+                    _pickedImage2 != null &&
+                    _pickedMusic != null &&
+                    iteamData != "Select Catagory") {
+                  Provider.of<UserDataProvider>(context, listen: false)
+                      .uplodeSong(
+                          _pickedImage1!,
+                          _pickedImage2!,
+                          _titleController.text,
+                          _descriptionController.text,
+                          _pickedMusic!,
+                          selectedValue!,
+                          Provider.of<UserDataProvider>(context, listen: false)
+                                  .getUid ??
+                              "NRT FM",
+                          Provider.of<UserDataProvider>(context, listen: false)
+                                  .getName ??
+                              "NRT FM")
+                      .whenComplete(() => {Get.back()});
+                } else {
+                  Snackber.errorSnackbar(
+                      'Uplode failed', 'Please fill all the fields');
+                }
+              },
+              child: Container(
+                height: 43.h,
+                color: const Color.fromARGB(255, 1, 196, 50),
+                child: Center(
+                  child: Text(
+                    Provider.of<UserDataProvider>(context, listen: true)
+                                .getIsuplode ==
+                            false
+                        ? 'Uplode'
+                        : 'Uploding...',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 15.5.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
               ),
-            ),
-          ),
-        ),
-      ),
+            )
+          : const Center(child: CircularProgressIndicator()),
       appBar: AppBar(
         elevation: 1,
         backgroundColor: Kcolor.bgColor,
@@ -69,7 +116,7 @@ class _MusicUplodeState extends State<MusicUplode> {
               TextInputField(
                 label: 'Song Tittle',
                 maxline: 1,
-                controller: TextEditingController(),
+                controller: _titleController,
               ),
               SizedBox(
                 height: 20.h,
@@ -77,7 +124,7 @@ class _MusicUplodeState extends State<MusicUplode> {
               TextInputField(
                 label: 'description',
                 maxline: 3,
-                controller: TextEditingController(),
+                controller: _descriptionController,
               ),
               SizedBox(
                 height: 10.h,
@@ -158,6 +205,31 @@ class _MusicUplodeState extends State<MusicUplode> {
                         )
                 ],
               ),
+              SizedBox(
+                height: 20.h,
+              ),
+              CustomDropdownButton2(
+                buttonWidth: double.infinity,
+                buttonHeight: 45.h,
+                dropdownWidth: 300.w,
+                buttonDecoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(7),
+                  border: Border.all(
+                    color: const Color.fromARGB(121, 240, 0, 0),
+                    width: 2,
+                  ),
+                  color: const Color.fromARGB(81, 159, 158, 158),
+                ),
+                hint: iteamData,
+                dropdownItems: items,
+                value: selectedValue,
+                onChanged: (value) {
+                  setState(() {
+                    selectedValue = value;
+                    iteamData = value!;
+                  });
+                },
+              ),
             ],
           ),
         ),
@@ -165,7 +237,7 @@ class _MusicUplodeState extends State<MusicUplode> {
     );
   }
 
-  ////  Al uploding fuction (image and music )  ////
+  ///  Al uploding fuction (image and music )  ///
   _loadPicker1() async {
     final ImagePicker picker = ImagePicker();
     XFile? pickedFile = (await picker.pickImage(source: ImageSource.gallery));

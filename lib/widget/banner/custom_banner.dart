@@ -5,11 +5,12 @@ class CustomPic extends StatelessWidget {
   final double height;
   final double width;
 
-  const CustomPic(
-      {super.key,
-      required this.imageUrl,
-      required this.height,
-      required this.width});
+  const CustomPic({
+    super.key,
+    required this.imageUrl,
+    required this.height,
+    required this.width,
+  });
 
   @override
   Widget build(BuildContext context) {

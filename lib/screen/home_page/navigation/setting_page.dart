@@ -1,14 +1,25 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nrtfm/constant/color.dart';
+import 'package:nrtfm/controller/login/login_bloc.dart';
 import 'package:nrtfm/screen/home_page/others/about_page.dart';
 import 'package:nrtfm/screen/home_page/others/account_info_page.dart';
 import 'package:nrtfm/screen/home_page/others/developer_page.dart';
 import 'package:nrtfm/screen/home_page/others/uplode_music.dart';
+import 'package:nrtfm/screen/home_page/others/your_collection.dart';
 import 'package:nrtfm/utils/barrel.dart';
 import 'package:nrtfm/widget/banner/custom_banner.dart';
 
-class SettingPage extends StatelessWidget {
-  const SettingPage({super.key});
+class SettingPage extends StatefulWidget {
+  const SettingPage({
+    super.key,
+  });
 
+  @override
+  State<SettingPage> createState() => _SettingPageState();
+}
+
+class _SettingPageState extends State<SettingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,48 +83,69 @@ class SettingPage extends StatelessWidget {
                 thickness: 1,
               ),
             ),
-            ListTile(
-              title: Text('Uplode audio',
-                  style: GoogleFonts.poppins(
-                    fontSize: 13.5.sp,
-                    color: Kcolor.txt2,
-                  )),
-              trailing: Icon(
-                Icons.arrow_forward_ios,
-                size: 15.sp,
-                color: Kcolor.txt2,
-              ),
-              onTap: () {
-                Get.to(() => const MusicUplode());
-              },
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.w),
-              child: const Divider(
-                color: Kcolor.txt1,
-                thickness: 1,
-              ),
-            ),
-            ListTile(
-              title: Text('Your collection',
-                  style: GoogleFonts.poppins(
-                    fontSize: 13.5.sp,
-                    color: Kcolor.txt2,
-                  )),
-              trailing: Icon(
-                Icons.arrow_forward_ios,
-                size: 15.sp,
-                color: Kcolor.txt2,
-              ),
-              onTap: () {},
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.w),
-              child: const Divider(
-                color: Kcolor.txt1,
-                thickness: 1,
-              ),
-            ),
+            StreamBuilder(
+                stream:
+                    FirebaseFirestore.instance.collection("Users").snapshots(),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 30.h),
+                        child: const CircularProgressIndicator(),
+                      ),
+                    );
+                  }
+                  return snapshot.data!.docs[0]['admin'] == true
+                      ? Column(
+                          children: [
+                            ListTile(
+                              title: Text('Uplode audio',
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 13.5.sp,
+                                    color: Kcolor.txt2,
+                                  )),
+                              trailing: Icon(
+                                Icons.arrow_forward_ios,
+                                size: 15.sp,
+                                color: Kcolor.txt2,
+                              ),
+                              onTap: () {
+                                Get.to(() => const MusicUplode());
+                              },
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 10.w),
+                              child: const Divider(
+                                color: Kcolor.txt1,
+                                thickness: 1,
+                              ),
+                            ),
+                            ListTile(
+                              title: Text('Your collection',
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 13.5.sp,
+                                    color: Kcolor.txt2,
+                                  )),
+                              trailing: Icon(
+                                Icons.arrow_forward_ios,
+                                size: 15.sp,
+                                color: Kcolor.txt2,
+                              ),
+                              onTap: () {
+                                Get.to(() => const YourCollection());
+                              },
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 10.w),
+                              child: const Divider(
+                                color: Kcolor.txt1,
+                                thickness: 1,
+                              ),
+                            ),
+                          ],
+                        )
+                      : const SizedBox();
+                }),
             ListTile(
               title: Text('Developer info',
                   style: GoogleFonts.poppins(
@@ -147,7 +179,9 @@ class SettingPage extends StatelessWidget {
                 size: 15.sp,
                 color: Kcolor.txt2,
               ),
-              onTap: () {},
+              onTap: () {
+                BlocProvider.of<LoginBloc>(context).add(const Logout());
+              },
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 10.w),

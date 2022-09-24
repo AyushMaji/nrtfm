@@ -7,7 +7,8 @@ import 'package:nrtfm/screen/home_page/navigation/setting_page.dart';
 import 'package:nrtfm/utils/barrel.dart';
 
 class Navigation extends StatefulWidget {
-  const Navigation({Key? key}) : super(key: key);
+  final String id;
+  const Navigation({Key? key, required this.id}) : super(key: key);
 
   @override
   State<Navigation> createState() => _NavigationState();
@@ -16,11 +17,11 @@ class Navigation extends StatefulWidget {
 class _NavigationState extends State<Navigation> {
   int currentPage = 0;
   final PageController _pageController = PageController();
-  List<Widget> page = const [
-    HomePage(),
-    SearchPage(),
-    FavPage(),
-    SettingPage(),
+  List<Widget> page = [
+    const HomePage(),
+    const SearchPage(),
+    const FavPage(),
+    const SettingPage(),
   ];
   List<BottomBarItem> icon = const <BottomBarItem>[
     BottomBarItem(

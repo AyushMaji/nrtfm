@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "711510072154",
+    "project_id": "nrtfm-3ea2b",
+    "storage_bucket": "nrtfm-3ea2b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:711510072154:android:73c4e20dee46e34e0ff163",
+        "android_client_info": {
+          "package_name": "com.podcast.nrtfm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "711510072154-imc5ecpqdt6h2k6gu7b5i8p2k3rtcloe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7hvf9Z7AoIYXEM5a7eOQcwk0ZWdNsX-0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "711510072154-imc5ecpqdt6h2k6gu7b5i8p2k3rtcloe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
