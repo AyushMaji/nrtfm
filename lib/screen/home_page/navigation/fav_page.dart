@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:lottie/lottie.dart';
 import 'package:nrtfm/constant/color.dart';
+import 'package:nrtfm/provider/audio_player/audio_player.dart';
 import 'package:nrtfm/provider/userdata.dart';
+import 'package:nrtfm/screen/home_page/others/music_page.dart';
 import 'package:nrtfm/utils/barrel.dart';
 import 'package:nrtfm/widget/bookmark_card/bookmark_card.dart';
 
@@ -88,6 +90,24 @@ class FavPage extends StatelessWidget {
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       return GestureDetector(
+                        onTap: () {
+                          Provider.of<MusicPlayer>(context, listen: false)
+                              .musicPlayer(
+                                  snapshot.data.docs[index]['music'],
+                                  snapshot.data.docs[index]['musicId'],
+                                  snapshot.data.docs[index]['songPoster'],
+                                  snapshot.data.docs[index]['rating']
+                                      .toString(),
+                                  snapshot.data.docs[index]['totalRating']
+                                      .toString(),
+                                  snapshot.data.docs[index]['views'].toString(),
+                                  snapshot.data.docs[index]['tittle'],
+                                  snapshot.data.docs[index]['description']);
+
+                          Get.to(() => MusicPage(
+                                musicId: snapshot.data.docs[index]['musicId'],
+                              ));
+                        },
                         onLongPress: () {
                           showDialog(
                               context: context,

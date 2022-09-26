@@ -27,9 +27,9 @@ class _SettingPageState extends State<SettingPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 45.h),
+            SizedBox(height: 0.h),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 15.w),
+              padding: EdgeInsets.symmetric(horizontal: 0.w),
               child: Center(
                 child: CustomPic(
                     imageUrl:

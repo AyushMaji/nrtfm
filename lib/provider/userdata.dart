@@ -249,11 +249,16 @@ class UserDataProvider extends ChangeNotifier {
       for (var result in value.docs) {
         firebaseFirestore.collection("AddToCard").doc(addtocardid).set({
           'musicId': musicId,
+          'music': result.data()['music'],
+          'description': result.data()['description'],
           'songPoster': result.data()['songPoster'],
           'tittle': result.data()['tittle'],
           'catagory': result.data()['catagory'],
           'totalRating': result.data()['totalRating'],
           'userID': userID,
+          'rating': result.data()['rating'],
+          'price': result.data()['price'],
+          'views': result.data()['views'],
           'timeStamp': DateTime.now(),
         });
         Snackber.successSnackbar('Added to your Playlist', 'Done');

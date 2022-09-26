@@ -13,9 +13,6 @@ class SearchPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
-              height: 55.h,
-            ),
             // Padding(
             //   padding: EdgeInsets.symmetric(horizontal: 20.w),
             //   child: GestureDetector(

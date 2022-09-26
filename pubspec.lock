@@ -1225,6 +1225,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.6"
+  swipeable_tile:
+    dependency: "direct main"
+    description:
+      name: swipeable_tile
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0+2"
   synchronized:
     dependency: transitive
     description:

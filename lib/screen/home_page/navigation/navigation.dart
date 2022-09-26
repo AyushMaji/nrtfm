@@ -71,6 +71,19 @@ class _NavigationState extends State<Navigation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Kcolor.bgColor,
+        elevation: 9,
+        title: Text(
+          'NRTFM',
+          style: GoogleFonts.roboto(
+            color: Kcolor.primaryColor,
+            fontSize: 20.sp,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        centerTitle: true,
+      ),
       backgroundColor: Kcolor.bgColor,
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(

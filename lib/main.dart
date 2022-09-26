@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
               ],
               child: GetMaterialApp(
                   theme: ThemeData(useMaterial3: true),
-                  title: 'Flutter Demo',
+                  title: 'NRT FM',
                   debugShowCheckedModeBanner: false,
                   home: const SpalashPage()),
             ),

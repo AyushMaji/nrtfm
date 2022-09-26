@@ -43,51 +43,64 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 20.h),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 13.w),
-                child: StreamBuilder(
-                    stream: FirebaseFirestore.instance
-                        .collection('music')
-                        .orderBy('time', descending: true)
-                        .snapshots(),
-                    builder: (context, AsyncSnapshot snapshot) {
-                      if (snapshot.hasData) {
-                        return CarouselSlider.builder(
-                          carouselController: _controller,
-                          itemCount: snapshot.data.docs.length,
-                          itemBuilder: (context, index, realIndex) {
-                            return CustomPic(
+              StreamBuilder(
+                  stream: FirebaseFirestore.instance
+                      .collection('music')
+                      .orderBy('time', descending: true)
+                      .snapshots(),
+                  builder: (context, AsyncSnapshot snapshot) {
+                    if (snapshot.hasData) {
+                      return CarouselSlider.builder(
+                        carouselController: _controller,
+                        itemCount: snapshot.data.docs.length,
+                        itemBuilder: (context, index, realIndex) {
+                          return GestureDetector(
+                            onTap: () {
+                              Provider.of<MusicPlayer>(context, listen: false)
+                                  .musicPlayer(
+                                      snapshot.data.docs[index]['music'],
+                                      snapshot.data.docs[index]['musicId'],
+                                      snapshot.data.docs[index]['songPoster'],
+                                      snapshot.data.docs[index]['rating']
+                                          .toString(),
+                                      snapshot.data.docs[index]['totalRating']
+                                          .toString(),
+                                      snapshot.data.docs[index]['views']
+                                          .toString(),
+                                      snapshot.data.docs[index]['tittle'],
+                                      snapshot.data.docs[index]['description']);
+
+                              Get.to(() => MusicPage(
+                                    musicId: snapshot.data.docs[index]
+                                        ['musicId'],
+                                  ));
+                            },
+                            child: CustomPic(
                               imageUrl: snapshot.data.docs[index]['songBanner'],
-                              height: 160.h,
+                              height: 150.h,
                               width: double.infinity,
-                            );
-                          },
-                          options: CarouselOptions(
-                            height: 200.h,
-                            autoPlay: true,
-                            enlargeCenterPage: true,
-                            viewportFraction: 0.8,
-                            aspectRatio: 2.0,
-                            initialPage: 0,
-                          ),
-                        );
-                      } else {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-                      // return CustomPic(
-                      //     imageUrl: snapshot.data.docs[0].data()['songBanner'],
-                      //     height: 160.h,
-                      //     width: double.infinity);
-                    }),
-              ),
-              SizedBox(height: 20.h),
+                            ),
+                          );
+                        },
+                        options: CarouselOptions(
+                          height: 190.h,
+                          autoPlay: true,
+                          enlargeCenterPage: true,
+                          viewportFraction: 0.8,
+                          aspectRatio: 2.0,
+                          initialPage: 0,
+                        ),
+                      );
+                    } else {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                  }),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                padding: EdgeInsets.symmetric(horizontal: 25.w),
                 child: Header(
-                    url: "assets/images/top20.png",
+                    url: "assets/images/bookmark.png",
                     icon: Icon(
                       Icons.arrow_forward_ios_sharp,
                       color: Kcolor.primaryColor,
@@ -96,9 +109,9 @@ class _HomePageState extends State<HomePage> {
                     isShow: true),
               ),
               Padding(
-                padding: EdgeInsets.only(left: 15.w, top: 20.h),
+                padding: EdgeInsets.only(left: 20.w, top: 23.h),
                 child: SizedBox(
-                  height: 160.h,
+                  height: 165.h,
                   child: StreamBuilder(
                       stream: FirebaseFirestore.instance
                           .collection('music')
@@ -121,21 +134,28 @@ class _HomePageState extends State<HomePage> {
                                 title: snapshot.data.docs[index]['tittle'],
                                 image: snapshot.data.docs[index]['songPoster'],
                                 onTap: () {
-                                  // Provider.of<MusicPlayer>(context,
-                                  //         listen: false)
-                                  //     .musicPlayer(
-                                  //   "https://previews.customer.envatousercontent.com/files/332744075/preview.mp3",
-                                  //   "musicId",
-                                  //   'https://picsum.photos/200/300?image=${index + 1}',
-                                  //   '34',
-                                  //   '4.5',
-                                  //   '$index',
-                                  //   'Title $index',
-                                  //   'loream ipsum  loream ipsum  vloream  loream ipsum  loream ipsum  vloream ipsum loream ipsum shc as chas sc ahs ipsum loream ipsum shc as chas sc ahs loream ipsum  loream ipsum  vloream ipsum loream ipsum shc as chas sc ahs',
-                                  // );
-                                  // Get.to(() => const MusicPage(
-                                  //       musicId: 'wevfwEVWV',
-                                  //     ));
+                                  Provider.of<MusicPlayer>(context,
+                                          listen: false)
+                                      .musicPlayer(
+                                          snapshot.data.docs[index]['music'],
+                                          snapshot.data.docs[index]['musicId'],
+                                          snapshot.data.docs[index]
+                                              ['songPoster'],
+                                          snapshot.data.docs[index]['rating']
+                                              .toString(),
+                                          snapshot
+                                              .data.docs[index]['totalRating']
+                                              .toString(),
+                                          snapshot.data.docs[index]['views']
+                                              .toString(),
+                                          snapshot.data.docs[index]['tittle'],
+                                          snapshot.data.docs[index]
+                                              ['description']);
+
+                                  Get.to(() => MusicPage(
+                                        musicId: snapshot.data.docs[index]
+                                            ['musicId'],
+                                      ));
                                 },
                                 views: '300',
                               );
@@ -143,18 +163,6 @@ class _HomePageState extends State<HomePage> {
                       }),
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 13.w),
-                child: Header(
-                    url: "assets/images/bookmark.png",
-                    icon: Icon(
-                      Icons.arrow_forward_ios_sharp,
-                      color: Kcolor.primaryColor,
-                      size: 15.sp,
-                    ),
-                    isShow: true),
-              ),
-              SizedBox(height: 20.h),
               StreamBuilder(
                   stream: FirebaseFirestore.instance
                       .collection('music')
@@ -170,15 +178,44 @@ class _HomePageState extends State<HomePage> {
                         shrinkWrap: true,
                         itemCount: snapshot.data.docs.length,
                         itemBuilder: (context, index) {
-                          return ListCard(
-                              title: snapshot.data.docs[index]['tittle'],
-                              name: 'Ayush Maji',
-                              image: snapshot.data.docs[index]['songPoster'],
-                              onTap: () {},
-                              description: snapshot.data.docs[index]
-                                  ['description'],
-                              views: '300',
-                              rating: '4.5');
+                          return Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 10.w, vertical: 2.5.h),
+                              child: ListCard(
+                                title: snapshot.data.docs[index]['tittle'],
+                                name: 'Ayush Maji',
+                                image: snapshot.data.docs[index]['songPoster'],
+                                onTap: () {
+                                  Provider.of<MusicPlayer>(context,
+                                          listen: false)
+                                      .musicPlayer(
+                                          snapshot.data.docs[index]['music'],
+                                          snapshot.data.docs[index]['musicId'],
+                                          snapshot.data.docs[index]
+                                              ['songPoster'],
+                                          snapshot.data.docs[index]['rating']
+                                              .toString(),
+                                          snapshot
+                                              .data.docs[index]['totalRating']
+                                              .toString(),
+                                          snapshot.data.docs[index]['views']
+                                              .toString(),
+                                          snapshot.data.docs[index]['tittle'],
+                                          snapshot.data.docs[index]
+                                              ['description']);
+
+                                  Get.to(() => MusicPage(
+                                        musicId: snapshot.data.docs[index]
+                                            ['musicId'],
+                                      ));
+                                },
+                                description: snapshot.data.docs[index]
+                                    ['description'],
+                                views: snapshot.data.docs[index]['views']
+                                    .toString(),
+                                rating: snapshot.data.docs[index]['rating']
+                                    .toString(),
+                              ));
                         });
                   }),
             ],

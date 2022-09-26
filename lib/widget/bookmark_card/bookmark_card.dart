@@ -20,8 +20,8 @@ class BookMarkCard extends StatelessWidget {
     return Center(
       child: Container(
         padding: EdgeInsets.only(
-          left: 15.w,
-          right: 15.w,
+          left: 10.w,
+          right: 10.w,
           top: 10.h,
         ),
         child: Row(
@@ -36,16 +36,19 @@ class BookMarkCard extends StatelessWidget {
                   child:
                       CustomPic(imageUrl: imageUrl, height: 50.h, width: 65.w),
                 ),
-                SizedBox(width: 15.w),
+                SizedBox(width: 10.w),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      title,
-                      style: TextStyle(
-                        color: Kcolor.txt2,
-                        fontSize: 13.sp,
-                        fontWeight: FontWeight.bold,
+                    SizedBox(
+                      width: 198.w,
+                      child: Text(
+                        title,
+                        style: TextStyle(
+                          color: Kcolor.txt2,
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                     SizedBox(height: 1.h),
@@ -53,7 +56,7 @@ class BookMarkCard extends StatelessWidget {
                       views,
                       style: TextStyle(
                         color: Kcolor.txt1,
-                        fontSize: 12.sp,
+                        fontSize: 13.sp,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -64,7 +67,7 @@ class BookMarkCard extends StatelessWidget {
             Icon(
               Icons.favorite,
               color: Colors.green,
-              size: 27.sp,
+              size: 20.sp,
             )
           ],
         ),
