@@ -100,7 +100,7 @@ class _HomePageState extends State<HomePage> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 25.w),
                 child: Header(
-                    url: "assets/images/bookmark.png",
+                    url: "assets/images/top20.png",
                     icon: Icon(
                       Icons.arrow_forward_ios_sharp,
                       color: Kcolor.primaryColor,
@@ -115,7 +115,6 @@ class _HomePageState extends State<HomePage> {
                   child: StreamBuilder(
                       stream: FirebaseFirestore.instance
                           .collection('music')
-                          // .orderBy('views', descending: true)
                           .limit(20)
                           .snapshots(),
                       builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -166,6 +165,7 @@ class _HomePageState extends State<HomePage> {
               StreamBuilder(
                   stream: FirebaseFirestore.instance
                       .collection('music')
+                      .orderBy('time', descending: true)
                       .snapshots(),
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     if (!snapshot.hasData) {

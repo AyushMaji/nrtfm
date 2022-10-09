@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nrtfm/controller/login/login_bloc.dart';
+import 'package:nrtfm/provider/userdata.dart';
 import 'package:nrtfm/screen/home_page/navigation/navigation.dart';
 import 'package:nrtfm/screen/spalash/spalash_page.dart';
 import 'package:nrtfm/utils/barrel.dart';
@@ -43,6 +44,8 @@ class LoginPage extends StatelessWidget {
               loading: () {},
               login: (uid, uname) {
                 Snackber.successSnackbar('Login Success', 'Welcome $uname');
+                Provider.of<UserDataProvider>(context, listen: false)
+                    .getUserData();
                 Get.off(() => Navigation(
                       id: uid,
                     ));

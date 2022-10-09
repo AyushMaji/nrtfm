@@ -45,8 +45,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     });
 
     on<Logout>((event, emit) async {
+      final GoogleSignIn googleSignIn = GoogleSignIn();
+      googleSignIn.signOut();
       SharedPreferences.getInstance().then((value) {
         value.clear();
+
         Get.offAll(const SpalashPage());
       });
       emit(const _Logout());

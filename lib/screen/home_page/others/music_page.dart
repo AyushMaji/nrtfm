@@ -4,6 +4,7 @@ import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:like_button/like_button.dart';
+import 'package:lottie/lottie.dart';
 import 'package:marquee_text/marquee_direction.dart';
 import 'package:marquee_text/marquee_text.dart';
 import 'package:nrtfm/constant/color.dart';
@@ -79,17 +80,11 @@ class _MusicPageState extends State<MusicPage> {
                       dotSecondaryColor: Colors.pink,
                     ),
                     likeBuilder: (bool isLiked) {
-                      return isLiked
-                          ? Icon(
-                              Icons.favorite,
-                              color: Colors.pink,
-                              size: 25.sp,
-                            )
-                          : Icon(
-                              Icons.favorite,
-                              color: const Color.fromRGBO(120, 104, 230, 1),
-                              size: 25.sp,
-                            );
+                      return Icon(
+                        Icons.favorite_border,
+                        color: const Color.fromARGB(255, 243, 3, 83),
+                        size: 25.sp,
+                      );
                     },
                   ),
                 ),
@@ -537,9 +532,9 @@ class _MusicPageState extends State<MusicPage> {
                         final ratingDialog = RatingDialog(
                           starSize: 30.sp,
                           submitButtonText: 'Submit',
-                          onCancelled: () => print('cancelled'),
+                          onCancelled: () => log('cancelled'),
                           onSubmitted: (response) {
-                            print('rating: ${response.rating}, '
+                            log('rating: ${response.rating}, '
                                 'comment: ${response.comment}');
                             Provider.of<UserDataProvider>(context,
                                     listen: false)
@@ -587,6 +582,17 @@ class _MusicPageState extends State<MusicPage> {
                             child: CircularProgressIndicator(),
                           );
                         }
+
+                        if (snapshot.data.docs.length == 0) {
+                          return Column(
+                            children: [
+                              SizedBox(
+                                height: 250.h,
+                                child: Lottie.asset('assets/review.json'),
+                              ),
+                            ],
+                          );
+                        }
                         return ListView.builder(
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
@@ -619,6 +625,9 @@ class _MusicPageState extends State<MusicPage> {
                 ),
 
                 /// ==== comment box ====== ///
+                SizedBox(
+                  height: 20.h,
+                )
               ],
             ),
             // ========================================== comments ==================================== //

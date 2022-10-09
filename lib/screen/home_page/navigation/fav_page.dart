@@ -68,8 +68,7 @@ class FavPage extends StatelessWidget {
                       child: Padding(
                         padding: EdgeInsets.only(top: 15.h),
                         child: SizedBox(
-                          height: 100.h,
-                          child: Lottie.asset('assets/loading.json'),
+                          height: 0.h,
                         ),
                       ),
                     );

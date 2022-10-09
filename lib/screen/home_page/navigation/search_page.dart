@@ -86,7 +86,7 @@ class SearchPage extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     Get.to(() => const MusicList(
-                          catagory: 'music',
+                          catagory: 'conversation',
                         ));
                   },
                   child: const SearchCard(
@@ -112,11 +112,11 @@ class SearchPage extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     Get.to(() => const MusicList(
-                          catagory: 'conversation',
+                          catagory: 'music',
                         ));
                   },
                   child: const SearchCard(
-                    url: 'conversation',
+                    url: 'music',
                   ),
                 ),
                 InkWell(

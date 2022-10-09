@@ -13,17 +13,18 @@ class Gbtn extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Padding(
-          padding: EdgeInsets.only(bottom: 50.h),
-          child: SizedBox(
-            height: 90.h,
-            width: 190.w,
-            child: Image.asset(
-              "assets/images/logo.png",
+          padding: EdgeInsets.only(bottom: 20.h),
+          child: Text(
+            'NRT FM',
+            style: GoogleFonts.averiaLibre(
+              color: const Color.fromARGB(255, 255, 255, 255),
+              fontSize: 53.sp,
+              fontWeight: FontWeight.w900,
             ),
           ),
         ),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 21.w, vertical: 30.h),
+          padding: EdgeInsets.symmetric(horizontal: 23.w, vertical: 30.h),
           child: GestureDetector(
             onTap: onTap,
             child: Container(

@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nrtfm/constant/color.dart';
 import 'package:nrtfm/controller/login/login_bloc.dart';
+import 'package:nrtfm/provider/userdata.dart';
 import 'package:nrtfm/screen/home_page/others/about_page.dart';
 import 'package:nrtfm/screen/home_page/others/account_info_page.dart';
-import 'package:nrtfm/screen/home_page/others/developer_page.dart';
 import 'package:nrtfm/screen/home_page/others/uplode_music.dart';
 import 'package:nrtfm/screen/home_page/others/your_collection.dart';
 import 'package:nrtfm/utils/barrel.dart';
@@ -84,14 +84,18 @@ class _SettingPageState extends State<SettingPage> {
               ),
             ),
             StreamBuilder(
-                stream:
-                    FirebaseFirestore.instance.collection("Users").snapshots(),
+                stream: FirebaseFirestore.instance
+                    .collection("Users")
+                    .where('id',
+                        isEqualTo:
+                            Provider.of<UserDataProvider>(context, listen: true)
+                                .getUid)
+                    .snapshots(),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   if (!snapshot.hasData) {
-                    return Center(
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 30.h),
-                        child: const CircularProgressIndicator(),
+                    return const Center(
+                      child: SizedBox(
+                        height: 0,
                       ),
                     );
                   }
@@ -146,28 +150,28 @@ class _SettingPageState extends State<SettingPage> {
                         )
                       : const SizedBox();
                 }),
-            ListTile(
-              title: Text('Developer info',
-                  style: GoogleFonts.poppins(
-                    fontSize: 13.5.sp,
-                    color: Kcolor.txt2,
-                  )),
-              trailing: Icon(
-                Icons.arrow_forward_ios,
-                size: 15.sp,
-                color: Kcolor.txt2,
-              ),
-              onTap: () {
-                Get.to(() => const DeveloperPage());
-              },
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.w),
-              child: const Divider(
-                color: Kcolor.txt1,
-                thickness: 1,
-              ),
-            ),
+            // ListTile(
+            //   title: Text('Developer info',
+            //       style: GoogleFonts.poppins(
+            //         fontSize: 13.5.sp,
+            //         color: Kcolor.txt2,
+            //       )),
+            //   trailing: Icon(
+            //     Icons.arrow_forward_ios,
+            //     size: 15.sp,
+            //     color: Kcolor.txt2,
+            //   ),
+            //   onTap: () {
+            //     Get.to(() => const DeveloperPage());
+            //   },
+            // ),
+            // Padding(
+            //   padding: EdgeInsets.symmetric(horizontal: 10.w),
+            //   child: const Divider(
+            //     color: Kcolor.txt1,
+            //     thickness: 1,
+            //   ),
+            // ),
             ListTile(
               title: Text('log out',
                   style: GoogleFonts.poppins(

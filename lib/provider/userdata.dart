@@ -18,6 +18,7 @@ class UserDataProvider extends ChangeNotifier {
   bool get getIsuplode => isUplode;
   String? userPic;
   String? get getUserPic => userPic;
+  
   Future getUserData() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     uid = preferences.getString('ID');

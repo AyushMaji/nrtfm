@@ -50,6 +50,12 @@ class _MusicListState extends State<MusicList> {
                       child: CircularProgressIndicator(),
                     );
                   }
+                  if (snapshot.data.docs.length == 0) {
+                    return const Text("No Data",
+                        style: TextStyle(
+                          color: Kcolor.white,
+                        ));
+                  }
                   return ListView.builder(
                     itemCount: snapshot.data.docs.length,
                     itemBuilder: (context, index) {
