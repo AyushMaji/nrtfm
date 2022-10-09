@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:nrtfm/constant/color.dart';
 import 'package:nrtfm/provider/audio_player/audio_player.dart';
-import 'package:nrtfm/provider/userdata.dart';
 import 'package:nrtfm/screen/home_page/others/music_page.dart';
 import 'package:nrtfm/utils/barrel.dart';
 import 'package:nrtfm/widget/card/list_card/list_card.dart';
@@ -61,75 +60,33 @@ class _MusicListState extends State<MusicList> {
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: EdgeInsets.symmetric(vertical: 2.h),
-                        child: GestureDetector(
-                          onLongPress: () {
-                            showDialog(
-                              context: context,
-                              builder: (context) {
-                                return AlertDialog(
-                                  title: const Text('Delete'),
-                                  content: const Text(
-                                      'Are you sure to delete this song'),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-                                      child: const Text('Cancel'),
-                                    ),
-                                    TextButton(
-                                      onPressed: () {
-                                        Provider.of<UserDataProvider>(context,
-                                                listen: false)
-                                            .deleteSong(
-                                          snapshot.data.docs[index].id,
-                                          snapshot.data.docs[index]
-                                              ['songPoster'],
-                                          snapshot.data.docs[index]
-                                              ['songBanner'],
-                                          snapshot.data.docs[index]['music'],
-                                        );
+                        child: ListCard(
+                          title: snapshot.data.docs[index]['tittle'],
+                          name: snapshot.data.docs[index]['ownername'],
+                          image: snapshot.data.docs[index]['songPoster'],
+                          onTap: () {
+                            Provider.of<MusicPlayer>(context, listen: false)
+                                .musicPlayer(
+                                    snapshot.data.docs[index]['music'],
+                                    snapshot.data.docs[index]['musicId'],
+                                    snapshot.data.docs[index]['songPoster'],
+                                    snapshot.data.docs[index]['rating']
+                                        .toString(),
+                                    snapshot.data.docs[index]['totalRating']
+                                        .toString(),
+                                    snapshot.data.docs[index]['views']
+                                        .toString(),
+                                    snapshot.data.docs[index]['tittle'],
+                                    snapshot.data.docs[index]['description']);
 
-                                        Navigator.pop(context);
-                                      },
-                                      child: const Text('Delete'),
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
+                            Get.to(() => MusicPage(
+                                  musicId: snapshot.data.docs[index]['musicId'],
+                                ));
                           },
-                          child: ListCard(
-                            title: snapshot.data.docs[index]['tittle'],
-                            name: snapshot.data.docs[index]['ownername'],
-                            image: snapshot.data.docs[index]['songPoster'],
-                            onTap: () {
-                              Provider.of<MusicPlayer>(context, listen: false)
-                                  .musicPlayer(
-                                      snapshot.data.docs[index]['music'],
-                                      snapshot.data.docs[index]['musicId'],
-                                      snapshot.data.docs[index]['songPoster'],
-                                      snapshot.data.docs[index]['rating']
-                                          .toString(),
-                                      snapshot.data.docs[index]['totalRating']
-                                          .toString(),
-                                      snapshot.data.docs[index]['views']
-                                          .toString(),
-                                      snapshot.data.docs[index]['tittle'],
-                                      snapshot.data.docs[index]['description']);
-
-                              Get.to(() => MusicPage(
-                                    musicId: snapshot.data.docs[index]
-                                        ['musicId'],
-                                  ));
-                            },
-                            description: snapshot.data.docs[index]
-                                ['description'],
-                            views:
-                                snapshot.data.docs[index]['views'].toString(),
-                            rating:
-                                snapshot.data.docs[index]['rating'].toString(),
-                          ),
+                          description: snapshot.data.docs[index]['description'],
+                          views: snapshot.data.docs[index]['views'].toString(),
+                          rating:
+                              snapshot.data.docs[index]['rating'].toString(),
                         ),
                       );
                     },

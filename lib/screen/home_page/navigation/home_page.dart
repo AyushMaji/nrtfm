@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:lottie/lottie.dart';
 import 'package:nrtfm/constant/color.dart';
 import 'package:nrtfm/provider/audio_player/audio_player.dart';
 import 'package:nrtfm/screen/home_page/others/music_page.dart';
@@ -32,9 +33,10 @@ class _HomePageState extends State<HomePage> {
                       musicId: Provider.of<MusicPlayer>(context, listen: false)
                           .getmusicId));
                 },
-                backgroundColor: Kcolor.primaryColor,
-                child: const Icon(Icons.music_note),
-              )
+                backgroundColor: const Color.fromARGB(121, 255, 0, 0),
+                child: Lottie.asset('assets/music.json')
+                //  const Icon(Icons.music_note),
+                )
             : const SizedBox(),
         body: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
