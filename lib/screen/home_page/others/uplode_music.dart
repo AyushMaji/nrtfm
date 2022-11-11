@@ -33,7 +33,7 @@ class _MusicUplodeState extends State<MusicUplode> {
       'conversation',
       'recitation',
       'music',
-      'other'
+      'others'
     ];
 
     return Scaffold(

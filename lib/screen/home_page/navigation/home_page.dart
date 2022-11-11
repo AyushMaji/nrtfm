@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
                       musicId: Provider.of<MusicPlayer>(context, listen: false)
                           .getmusicId));
                 },
-                backgroundColor: const Color.fromARGB(121, 255, 0, 0),
+                backgroundColor: const Color.fromARGB(222, 255, 0, 0),
                 child: Lottie.asset('assets/music.json')
                 //  const Icon(Icons.music_note),
                 )
